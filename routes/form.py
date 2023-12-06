@@ -52,7 +52,7 @@ class Route:  # pylint: disable=E1101,R0903
         is_error = "error" in flask.request.args
         #
         return self.descriptor.render_template(
-            "redirect.html",
+            "login.html",
             action=action,
             parameters=[
                 {
