@@ -77,9 +77,13 @@ class Route:  # pylint: disable=E1101,R0903
             if user["login"] == login and user["password"] == password:
                 auth_ok = True
                 auth_exp = datetime.datetime.now()+datetime.timedelta(seconds=86400)
+                #
                 auth_name = user["login"]
-                auth_attributes = {}
+                auth_attributes = user.get("attributes", {})
+                #
                 auth_sessionindex = auth.get_auth_reference()
+                if isinstance(auth_sessionindex, bytes):
+                    auth_sessionindex = auth_sessionindex.decode()
                 #
                 try:
                     auth_user_id = \
