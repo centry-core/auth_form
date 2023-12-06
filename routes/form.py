@@ -60,7 +60,7 @@ class Route:  # pylint: disable=E1101,R0903
                     "value": target_token,
                 },
             ],
-            is_error=is_error,
+            error=is_error,
         )
 
     @web.route("/authorize", methods=["POST"])
