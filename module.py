@@ -34,7 +34,9 @@ class Module(module.ModuleModel):
         """ Init module """
         log.info("Initializing module")
         # Init
-        self.descriptor.init_all()
+        self.descriptor.init_all(
+            url_prefix=self.get_url_prefix(),
+        )
         # Register auth provider
         auth_core.register_auth_provider(
             "form",
