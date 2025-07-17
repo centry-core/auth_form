@@ -30,20 +30,12 @@ class Module(module.ModuleModel):
         self.context = context
         self.descriptor = descriptor
 
-    def _get_url_prefix(self, url_prefix=None):
-        if url_prefix is None:
-            url_prefix = f"/{self.descriptor.name}"
-        #
-        core_prefix = auth_core.descriptor.config.get("url_prefix", "/")
-        #
-        return f'{core_prefix.rstrip("/")}/{url_prefix.lstrip("/")}'
-
     def init(self):
         """ Init module """
         log.info("Initializing module")
         # Init
         self.descriptor.init_all(
-            url_prefix=self._get_url_prefix(),
+            url_prefix=auth_core.get_relative_url_prefix(self.descriptor),
         )
         # Register auth provider
         auth_core.register_auth_provider(
