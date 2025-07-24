@@ -17,8 +17,10 @@
 
 """ Module """
 
-from pylon.core.tools import log  # pylint: disable=E0401
-from pylon.core.tools import module  # pylint: disable=E0401
+from pylon.core.tools import log  # pylint: disable=E0401,E0611
+from pylon.core.tools import module  # pylint: disable=E0401,E0611
+
+from tools import auth_core  # pylint: disable=E0401
 
 
 class Module(module.ModuleModel):
@@ -32,9 +34,11 @@ class Module(module.ModuleModel):
         """ Init module """
         log.info("Initializing module")
         # Init
-        self.descriptor.init_all()
+        self.descriptor.init_all(
+            url_prefix=auth_core.get_relative_url_prefix(self.descriptor),
+        )
         # Register auth provider
-        self.context.rpc_manager.call.auth_register_auth_provider(
+        auth_core.register_auth_provider(
             "form",
             login_route="auth_form.login",
             logout_route="auth_form.logout",
@@ -44,4 +48,4 @@ class Module(module.ModuleModel):
         """ De-init module """
         log.info("De-initializing module")
         # De-init
-        # self.descriptor.deinit_all()
+        self.descriptor.deinit_all()

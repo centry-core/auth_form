@@ -24,7 +24,7 @@ import flask  # pylint: disable=E0401
 from pylon.core.tools import log  # pylint: disable=E0611,E0401,W0611
 from pylon.core.tools import web  # pylint: disable=E0611,E0401
 
-from tools import auth  # pylint: disable=E0401
+from tools import auth_core  # pylint: disable=E0401
 
 
 class Route:  # pylint: disable=E1101,R0903
@@ -81,19 +81,16 @@ class Route:  # pylint: disable=E1101,R0903
                 auth_name = user["login"]
                 auth_attributes = user.get("attributes", {})
                 #
-                auth_sessionindex = auth.get_auth_reference()
+                auth_sessionindex = auth_core.get_auth_reference()
                 if isinstance(auth_sessionindex, bytes):
                     auth_sessionindex = auth_sessionindex.decode()
                 #
                 try:
-                    auth_user_id = \
-                        self.context.rpc_manager.call.auth_get_user_from_provider(
-                            auth_name
-                        )["id"]
+                    auth_user_id = auth_core.get_user_from_provider(auth_name)["id"]
                 except:  # pylint: disable=W0702
                     auth_user_id = None
                 #
-                auth_ctx = auth.get_auth_context()
+                auth_ctx = auth_core.get_auth_context()
                 auth_ctx["done"] = auth_ok
                 auth_ctx["error"] = ""
                 auth_ctx["expiration"] = auth_exp
@@ -102,9 +99,9 @@ class Route:  # pylint: disable=E1101,R0903
                 auth_ctx["provider_attr"]["attributes"] = auth_attributes
                 auth_ctx["provider_attr"]["sessionindex"] = auth_sessionindex
                 auth_ctx["user_id"] = auth_user_id
-                auth.set_auth_context(auth_ctx)
+                auth_core.set_auth_context(auth_ctx)
                 #
-                return auth.access_success_redirect(target_token)
+                return auth_core.access_success_redirect(target_token)
         #
         return flask.redirect(
             flask.url_for("auth_form.login", error="true")
@@ -114,4 +111,4 @@ class Route:  # pylint: disable=E1101,R0903
     def logout(self):
         """ Logout """
         target_token = flask.request.args.get("target_to", "")
-        return auth.logout_success_redirect(target_token)
+        return auth_core.logout_success_redirect(target_token)
