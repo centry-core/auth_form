@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,27 +8,30 @@
     <title>Centry login</title>
   </head>
   <body class="text-center">
-    <div class="form-signin">
-      <form action="{{ action }}" method="post">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="login" name="login" placeholder="Login">
-          <label for="login">Login</label>
-        </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-          <label for="password">Password</label>
-        </div>
-        {%- for item in parameters %}
-        <input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
-        {%- endfor %}
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        {%- if error %}
-        <div class="alert alert-danger mt-2" role="alert">
-          Invalid login or password
-        </div>
-        {%- endif %}
-      </form>
+    <div class="card card-signin">
+      <div class="form-signin">
+        <form action="{{ action }}" method="post">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="login" name="login" placeholder="Login">
+            <label for="login">Login</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="password">Password</label>
+          </div>
+          {%- for item in parameters %}
+          <input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
+          {%- endfor %}
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+          {%- if error %}
+          <div class="alert alert-danger mt-2" role="alert">
+            Invalid login or password
+          </div>
+          {%- endif %}
+        </form>
+      </div>
     </div>
     <script src="{{ url_for('auth_form.static', filename='js/vendor/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('auth_form.static', filename='js/login.js') }}"></script>
   </body>
 </html>
