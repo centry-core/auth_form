@@ -241,7 +241,7 @@
             text-align: center;
             font-weight: bold;
             box-shadow: 0 0 20px #ff6666;
-            animation: pulse 1.5s infinite;
+            animation: fadeIn 1.5s ease-in-out, pulse 1.5s infinite;
         }
 
         @keyframes pulse {
@@ -299,7 +299,7 @@
         </div>
 
         {%- if error %}
-        <div class="error-banner fade-in">INVALID LOGIN OR PASSWORD</div>
+        <div class="error-banner">INVALID LOGIN OR PASSWORD</div>
         {%- endif %}
 
         <div class="login-form fade-in">
