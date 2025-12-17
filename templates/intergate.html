@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centry login</title>
+    <style>
+        body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .gate-container {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .outer-ring {
+            position: absolute;
+            width: 750px;
+            height: 750px;
+            border: 8px solid #00f2ff;
+            border-radius: 50%;
+            background-color: #e0f0ff;
+            box-shadow: 0 0 20px #00f2ff;
+        }
+
+        .inner-ring {
+            position: absolute;
+            width: 550px;
+            height: 550px;
+            border: 12px solid #000;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .gate-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .gate-subtitle {
+            font-size: 16px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .login-form {
+            position: absolute;
+            bottom: 100px;
+            width: 300px;
+            padding: 30px;
+            background-color: #000;
+            border: 2px solid #00f2ff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #00f2ff;
+            color: #fff;
+        }
+
+        .login-form h2 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #00f2ff;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00f2ff;
+            box-shadow: 0 0 10px #00f2ff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #00f2ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #00ccff;
+            box-shadow: 0 0 15px #00f2ff;
+        }
+
+        .caution-sign {
+            position: absolute;
+            bottom: 200px;
+            width: 120px;
+            height: 150px;
+            background-color: #000;
+            border: 4px solid #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .caution-header {
+            background-color: #ff0;
+            color: #000;
+            width: 100%;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .caution-body {
+            padding: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .system-levels {
+            position: absolute;
+            bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .system-level {
+            width: 150px;
+            padding: 5px;
+            background-color: #000;
+            border: 2px solid #00f2ff;
+            color: #00f2ff;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .battery {
+            position: absolute;
+            top: 50px;
+            width: 80px;
+            height: 20px;
+            background-color: #000;
+            border: 2px solid #00f2ff;
+        }
+
+        .battery-fill {
+            width: 70%;
+            height: 100%;
+            background-color: #00f2ff;
+        }
+
+        .centry-core {
+            position: absolute;
+            left: 100px;
+            top: 250px;
+            width: 100px;
+            padding: 5px;
+            background-color: #000;
+            border: 2px solid #00f2ff;
+            color: #00f2ff;
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .barcode {
+            position: absolute;
+            right: 100px;
+            top: 250px;
+            width: 100px;
+            height: 50px;
+            background: linear-gradient(to right, #000 0%, #000 10%, #00f2ff 10%, #00f2ff 20%, #000 20%, #000 30%, #00f2ff 30%, #00f2ff 40%, #000 40%, #000 50%, #00f2ff 50%, #00f2ff 60%, #000 60%, #000 70%, #00f2ff 70%, #00f2ff 80%, #000 80%, #000 90%, #00f2ff 90%, #00f2ff 100%);
+        }
+
+        .error-banner {
+            position: absolute;
+            top: 100px;
+            width: 600px;
+            padding: 15px;
+            background-color: #ff0000;
+            color: #fff;
+            border: 2px solid #ff6666;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 0 20px #ff6666;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gate-container">
+        <div class="outer-ring"></div>
+        <div class="inner-ring">
+            <div class="center-circle">
+                <div class="gate-title">GATE</div>
+                <div class="gate-subtitle">LOGIN INTERFACE</div>
+            </div>
+        </div>
+
+        <div class="battery">
+            <div class="battery-fill"></div>
+        </div>
+
+        <div class="centry-core">
+            CENTRY CORE<br>PLATFORM
+        </div>
+
+        <div class="barcode"></div>
+
+        <div class="caution-sign">
+            <div class="caution-header">CAUTION</div>
+            <div class="caution-body">ACCESS RESTRICTED<br>TO AUTHORIZED PERSONNEL ONLY</div>
+        </div>
+
+        <div class="system-levels">
+            <div class="system-level">SYSTEM LEVEL 1</div>
+            <div class="system-level">SYSTEM LEVEL 2</div>
+            <div class="system-level">SYSTEM LEVEL 3</div>
+            <div class="system-level">SYSTEM LEVEL 4</div>
+        </div>
+
+        {%- if error %}
+        <div class="error-banner">INVALID LOGIN OR PASSWORD</div>
+        {%- endif %}
+
+        <div class="login-form">
+            <form action="{{ action }}" method="post">
+                <div class="form-group">
+                    <label for="login">LOGIN</label>
+                    <input type="text" id="login" name="login" placeholder="Enter login">
+                </div>
+                <div class="form-group">
+                    <label for="password">PASSWORD</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password">
+                </div>
+                {%- for item in parameters %}
+                <input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
+                {%- endfor %}
+                <button type="submit" class="submit-btn">SIGN IN</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
