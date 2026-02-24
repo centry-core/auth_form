@@ -1,0 +1,25 @@
+{
+  "$schema": "https://elitea.ai/admin-config-schema/v1",
+  "plugin": "auth_form",
+  "properties": {
+    "form_users": {
+      "type": "array",
+      "title": "Form Users",
+      "description": "Users who can log in with the form-based authentication provider. Each user needs a login name, email address, and password.",
+      "path": "users",
+      "section": "auth",
+      "default": [],
+      "requires_restart": true,
+      "visible_when": { "field": "auth_provider", "value": "form" },
+      "items": {
+        "type": "object",
+        "properties": {
+          "login": { "type": "string", "title": "Login" },
+          "password": { "type": "string", "title": "Password" },
+          "email": { "type": "string", "title": "Email" }
+        },
+        "required": ["login", "password", "email"]
+      }
+    }
+  }
+}
